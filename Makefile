@@ -27,7 +27,7 @@ endef
 
 setup: /nfsshare ## Setup environment
 	$(call echo_green," ...... Setup Environment ......")
-	kubectl apply -f https://raw.githubusercontent.com/intel/multus-cni/master/images/multus-daemonset.yml
+	kubectl apply -f ../multus-cni/deployments/multus-daemonset.yml
 
 install: setup ## Install all resources (CR/CRD's, RBAC and Operator)
 	$(call echo_green," ....... Creating namespace .......")

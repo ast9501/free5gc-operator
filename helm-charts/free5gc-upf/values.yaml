@@ -6,13 +6,13 @@ global:
   image:
     free5gc: {}
   mnCoreBridge:
-    subnet: 192.168.3.0/24
+    subnet: 10.233.128.0/24 #192.168.3.0/24
 
 replicaCount: 1
 
 image:
-  repository: steven30801/free5gc-build
-  tag: v2.0.2
+  repository: docker.io/free5gc/upf #steven30801/free5gc-build
+  tag: v3.2.1 #v2.0.2
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
@@ -20,11 +20,11 @@ nameOverride: ""
 fullnameOverride: ""
 
 pfcp:
-  addr: 192.168.2.10
+  addr: 10.233.102.10 #192.168.2.10
 gtpu:
-  addr: 192.168.3.10
+  addr: 10.233.128.10 #192.168.3.10
 
-sliceIdx: {}
+sliceIdx: 1
 
 podSecurityContext: {}
 

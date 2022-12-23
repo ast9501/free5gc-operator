@@ -31,25 +31,32 @@ spec:
           image: {{ include "upf.image" . | quote }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           command: ["/bin/bash"]
-          args: ["-c", "/root/setup.sh && ethtool -K net1 tx off && cd src/upf/build && ./bin/free5gc-upfd"]
+          args: ["-c", "sleep 5s && ./upf-iptables.sh && ./upf -c ./config/upfcfg.yaml"]
           stdin: true
           tty: true
           volumeMounts:
-            - name: free5gc-config
-              mountPath: /root/gofree5gc/config/free5GC.conf
-              subPath: free5GC.conf
+            - name: upf-script
+              mountPath: /free5gc/upf-iptables.sh
+              subPath: upf-iptables.sh
             - name: upf-config
-              mountPath: /root/gofree5gc/src/upf/build/config/upfcfg.yaml
+              mountPath: /free5gc/config/upfcfg.yaml
               subPath: upfcfg.yaml
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       volumes:
-        - name: free5gc-config
+        - name: upf-script
           configMap:
-            name: free5gc-configmap
+            name: upf-slice{{ .Values.sliceIdx }}-configmap
+            defaultMode: 0777
+            items:
+            - key: upf-iptables.sh
+              path: upf-iptables.sh
         - name: upf-config
           configMap:
             name: upf-slice{{ .Values.sliceIdx }}-configmap
+            items:
+            - key: upfcfg.yaml
+              path: upfcfg.yaml
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

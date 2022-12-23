@@ -6,26 +6,41 @@ metadata:
     "helm.sh/hook-weight": "-5"
 data:
   upfcfg.yaml: |
-    info:
-      version: 1.0.0
-      description: UPF configuration
-    
-    configuration:
-      # debugLevel: panic|fatal|error|warn|info|debug|trace
-      debugLevel: info
-    
-      pfcp:
+    version: 1.0.3
+    description: UPF initial local configuration
+
+    # The listen IP and nodeID of the N4 interface on this UPF (Can't set to 0.0.0.0)
+    pfcp:
+      addr: {{ .Values.gtpu.addr }}   # IP addr for listening
+      nodeID: {{ .Values.gtpu.addr }} # External IP or FQDN can be reached
+      retransTimeout: 1s # retransmission timeout
+      maxRetrans: 3 # the max number of retransmission
+
+    gtpu:
+      forwarder: gtp5g
+      # The IP list of the N3/N9 interfaces on this UPF
+      # If there are multiple connection, set addr to 0.0.0.0 or list all the addresses
+      ifList:
         - addr: {{ .Values.pfcp.addr }}
-    
-      gtpu:
-        - addr: {{ .Values.gtpu.addr }}
-        # [optional] gtpu.name
-        # - name: upf.5gc.nctu.me
-        # [optional] gtpu.ifname
-        # - ifname: gtpif
-    
-      apn_list:
-        - apn: internet
-          cidr: 60.60.0.0/24
-          # [optional] apn_list[*].natifname
-          # natifname: eth0
+          type: N3
+          # name: upf.5gc.nctu.me
+          # ifname: gtpif
+
+    # The DNN list supported by UPF
+    dnnList:
+      - dnn: internet # Data Network Name
+        cidr: 60.60.0.0/24 # Classless Inter-Domain Routing for assigned IPv4 pool of UE
+        # natifname: eth0
+
+    logger: # log output setting
+      enable: true # true or false
+      level: info # how detailed to output, value: trace, debug, info, warn, error, fatal, panic
+      reportCaller: false # enable the caller report or not, value: true or false
+
+  upf-iptables.sh: |
+    #!/bin/bash
+    #
+    # Configure iptables in UPF
+    #
+    iptables -t nat -A POSTROUTING -o eth0  -j MASQUERADE
+    iptables -I FORWARD 1 -j ACCEPT

@@ -5,12 +5,14 @@
 global:
   image:
     free5gc: {}
+  # Remove after unit test
+  #dbServiceDomain: mongo.default.svc.cluster.local
 
 replicaCount: 1
 
 image:
-  repository: steven30801/free5gc-build
-  tag: v2.0.2
+  repository: docker.io/alan0415/free5gc-ns-enabled #docker.io/free5gc/nrf #steven30801/free5gc-build
+  tag: v3.2.1
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
@@ -18,7 +20,7 @@ nameOverride: ""
 fullnameOverride: ""
 
 http:
-  addr: 192.168.2.4
+  addr: 10.233.102.4 #192.168.2.4
 
 podSecurityContext: {}
 

@@ -3,22 +3,32 @@ kind: ConfigMap
 metadata:
   name: nrf-configmap
 data:
-  nrfcfg.conf: |
+  nrfcfg.yaml: |
     info:
-      version: 1.0.0
+      version: 1.0.1
       description: NRF initial local configuration
     
     configuration:
       MongoDBName: "free5gc"
       MongoDBUrl: "mongodb://{{ .Values.global.dbServiceDomain }}:27017"
-      DefaultServiceIP: "{{ .Values.http.addr }}"
       sbi:
-        scheme: https
-        ipv4Addr: {{ .Values.http.addr }}
-        port: 29510
+        scheme: http
+        registerIPv4: {{ .Values.http.addr }} # IP used to serve NFs or register to another NRF
+        bindingIPv4: {{ .Values.http.addr }} # IP used to bind the service
+        port: 8000
+        tls: # the local path of TLS key
+          pem: config/TLS/nrf.pem # NRF TLS Certificate
+          key: config/TLS/nrf.key # NRF TLS Private key
       DefaultPlmnId:
         mcc: "208"
         mnc: "93"
       serviceNameList:
         - nnrf-nfm
-        - nnrf-disc   
+        - nnrf-disc
+    # the kind of log output
+    # debugLevel: how detailed to output, value: trace, debug, info, warn, error, fatal, panic
+    # ReportCaller: enable the caller report or not, value: true or false
+    logger:
+      NRF:
+        debugLevel: info
+        ReportCaller: false

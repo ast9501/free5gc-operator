@@ -27,21 +27,17 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: {{ include "amf.image" . | quote }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          command: ["/bin/bash"]
-          args: ["-c", "ethtool -K net1 tx off && ./bin/amf"]
+          #command: ["sleep"]
+          #args: ["3600"]
+          command: ["./amf"]
+          args: ["-c", "./config/amfcfg.yaml"]
           volumeMounts:
-            - name: free5gc-config
-              mountPath: /root/gofree5gc/config/free5GC.conf
-              subPath: free5GC.conf
             - name: amf-config
-              mountPath: /root/gofree5gc/config/amfcfg.conf
-              subPath: amfcfg.conf
+              mountPath: /free5gc/config/amfcfg.yaml
+              subPath: amfcfg.yaml
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       volumes:
-        - name: free5gc-config
-          configMap:
-            name: free5gc-configmap
         - name: amf-config
           configMap:
             name: amf-configmap

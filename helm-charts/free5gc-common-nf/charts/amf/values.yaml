@@ -5,12 +5,17 @@
 global:
   image:
     free5gc: {}
+  ## For unit test
+  #nrf:
+  #  addr: 10.233.102.4
+  #mnCoreBridge:
+  #  subnet: 10.233.128.0/24
 
 replicaCount: 1
 
 image:
-  repository: steven30801/free5gc-build
-  tag: v2.0.2
+  repository: docker.io/alan0415/free5gc-ns-enabled
+  tag: v3.2.1
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
@@ -18,9 +23,9 @@ nameOverride: ""
 fullnameOverride: ""
 
 http:
-  addr: 192.168.2.2
+  addr: 10.233.102.2 #192.168.2.2
 ngap:
-  addr: 192.168.3.2
+  addr: 10.233.128.2 #192.168.3.2
 
 podSecurityContext: {}
 

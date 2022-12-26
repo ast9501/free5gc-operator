@@ -24,17 +24,14 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: {{ include "nssf.image" . | quote }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          command: ["/bin/bash"]
-          args: ["-c", "./bin/nssf"]
+          command: ["./nssf"]
+          args: ["-c", "./config/nssfcfg.yaml"]
           stdin: true
           tty: true
           volumeMounts:
-            - name: free5gc-config
-              mountPath: /root/gofree5gc/config/free5GC.conf
-              subPath: free5GC.conf
             - name: nssf-config
-              mountPath: /root/gofree5gc/config/nssfcfg.conf
-              subPath: nssfcfg.conf
+              mountPath: /free5gc/config/nssfcfg.yaml
+              subPath: nssfcfg.yaml
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       volumes:

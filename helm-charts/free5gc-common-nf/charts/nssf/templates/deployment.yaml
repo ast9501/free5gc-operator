@@ -35,9 +35,6 @@ spec:
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       volumes:
-        - name: free5gc-config
-          configMap:
-            name: free5gc-configmap
         - name: nssf-config
           configMap:
             name: nssf-configmap

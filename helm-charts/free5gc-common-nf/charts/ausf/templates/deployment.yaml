@@ -24,23 +24,17 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: {{ include "ausf.image" . | quote }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          command: ["/bin/bash"]
-          args: ["-c", "./bin/ausf"]
+          command: ["./ausf"]
+          args: ["-c", "./config/ausfcfg.yaml"]
           stdin: true
           tty: true
           volumeMounts:
-            - name: free5gc-config
-              mountPath: /root/gofree5gc/config/free5GC.conf
-              subPath: free5GC.conf
             - name: ausf-config
-              mountPath: /root/gofree5gc/config/ausfcfg.conf
-              subPath: ausfcfg.conf
+              mountPath: /free5gc/config/ausfcfg.yaml
+              subPath: ausfcfg.yaml
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       volumes:
-        - name: free5gc-config
-          configMap:
-            name: free5gc-configmap
         - name: ausf-config
           configMap:
             name: ausf-configmap

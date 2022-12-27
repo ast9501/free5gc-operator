@@ -24,23 +24,17 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: {{ include "udr.image" . | quote }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          command: ["/bin/bash"]
-          args: ["-c", "./bin/udr"]
+          command: ["./udr"]
+          args: ["-c", "./config/udrcfg.yaml"]
           stdin: true
           tty: true
           volumeMounts:
-            - name: free5gc-config
-              mountPath: /root/gofree5gc/config/free5GC.conf
-              subPath: free5GC.conf
             - name: udr-config
-              mountPath: /root/gofree5gc/config/udrcfg.conf
-              subPath: udrcfg.conf
+              mountPath: /free5gc/config/udrcfg.yaml
+              subPath: udrcfg.yaml
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       volumes:
-        - name: free5gc-config
-          configMap:
-            name: free5gc-configmap
         - name: udr-config
           configMap:
             name: udr-configmap

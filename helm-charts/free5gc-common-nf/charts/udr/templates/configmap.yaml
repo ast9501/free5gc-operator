@@ -3,17 +3,29 @@ kind: ConfigMap
 metadata:
   name: udr-configmap
 data:
-  udrcfg.conf: |
+  udrcfg.yaml: |
     info:
-      version: 1.0.0
+      version: 1.0.1
       description: UDR initial local configuration
-    
+
     configuration:
-      sbi:
-        scheme: https
-        ipv4Addr: {{ .Values.http.addr }}
-        port: 29504
+      sbi: # Service-based interface information
+        scheme: http # the protocol for sbi (http or https)
+        registerIPv4: {{ .Values.http.addr }} # IP used to register to NRF
+        bindingIPv4: {{ .Values.http.addr }} # IP used to bind the service
+        port: 8000 # port used to bind the service
+        tls: # the local path of TLS key
+          pem: config/TLS/udr.pem # UDR TLS Certificate
+          key: config/TLS/udr.key # UDR TLS Private key
       mongodb:
-        name: free5gc
-        url: mongodb://{{ .Values.global.dbServiceDomain }}:27017
-      nrfUri: https://{{ .Values.global.nrf.addr }}:29510
+        name: free5gc # Database name in MongoDB
+        url: mongodb://{{ .Values.global.dbServiceDomain }}:27017 # URL of MongoDB
+      nrfUri: http://{{ .Values.global.nrf.addr }}:8000 # a valid URI of NRF
+
+    # the kind of log output
+    # debugLevel: how detailed to output, value: trace, debug, info, warn, error, fatal, panic
+    # ReportCaller: enable the caller report or not, value: true or false
+    logger:
+      UDR:
+        debugLevel: info
+        ReportCaller: false

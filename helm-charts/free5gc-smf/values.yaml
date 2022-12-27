@@ -6,13 +6,13 @@ global:
   image:
     free5gc: {}
   nrf:
-    addr: 192.168.2.4
+    addr: 10.233.102.4 #192.168.2.4
 
 replicaCount: 1
 
 image:
-  repository: steven30801/free5gc-build
-  tag: v2.0.2
+  repository: docker.io/alan0415/free5gc-ns-enabled #steven30801/free5gc-build
+  tag: v3.2.1 #v2.0.2
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
@@ -20,17 +20,19 @@ nameOverride: ""
 fullnameOverride: ""
 
 http:
-  addr: 192.168.2.7
+   addr: 10.233.102.7 #192.168.2.7
 pfcp:
-  addr: 192.168.2.7
+  addr: 10.233.102.7 #192.168.2.7
 upf:
   pfcp:
-    addr: 192.168.2.10
+    addr: 10.233.102.10 #192.168.2.10
   gtpu:
-    addr: 192.168.2.10
-gnb:
-  addr: 192.168.2.11
+    addr: 10.233.128.10 #10.233.128.10 #192.168.2.10
+#gnb:
+#  addr: 192.168.2.11
 
+## For unit test
+#sliceIdx: 1 
 sliceIdx: {}
 supportedSnssaiList: {}
 

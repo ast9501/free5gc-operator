@@ -1,6 +1,6 @@
 apiVersion: v2
 name: webui
-description: A Helm chart for Web UI
+description: A Helm chart for free5GC Web UI
 type: application
-version: 1.0.0
-appVersion: 2.0.2
+version: 1.0.1
+appVersion: 3.2.1

@@ -5,12 +5,13 @@
 global:
   image:
     free5gc: {}
-
+  ## For unit test
+  #dbServiceDomain: mongo.default.svc.free5gc.cluster.dev #mongo.default.svc.cluster.local
 replicaCount: 1
 
 image:
-  repository: steven30801/free5gc-build
-  tag: v2.0.2
+  repository: docker.io/alan0415/free5gc-ns-enabled #steven30801/free5gc-build
+  tag: v3.2.1 #v2.0.2
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []

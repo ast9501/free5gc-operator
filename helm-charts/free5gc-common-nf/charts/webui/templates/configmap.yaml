@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: webui-configmap
 data:
-  webuicfg.conf: |
+  webuicfg.yaml: |
     info:
       version: 1.0.0
       description: Web UI initial local configuration

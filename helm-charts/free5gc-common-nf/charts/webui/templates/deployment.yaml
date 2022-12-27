@@ -22,25 +22,21 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: {{ include "webui.image" . | quote }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          command: ["/bin/bash"]
-          args: ["-c", "cd webconsole && go run server.go -webuicfg webuicfg.conf"]
+          command: ["./webui"]
+          args: ["-c", "./config/webuicfg.yaml"]
+          #command: ["/bin/bash"]
+          #args: ["-c", "cd webconsole && go run server.go -webuicfg webuicfg.conf"]
           ports:
             - name: webui
               containerPort: {{ .Values.service.webui.port }}
               protocol: TCP
           volumeMounts:
-            - name: free5gc-config
-              mountPath: /root/gofree5gc/config/free5GC.conf
-              subPath: free5GC.conf
             - name: webui-config
-              mountPath: /root/gofree5gc/webconsole/webuicfg.conf
-              subPath: webuicfg.conf
+              mountPath: /free5gc/config/webuicfg.yaml
+              subPath: webuicfg.yaml
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       volumes:
-        - name: free5gc-config
-          configMap:
-            name: free5gc-configmap
         - name: webui-config
           configMap:
             name: webui-configmap

@@ -5,8 +5,9 @@
 global:
   image:
     free5gc: {}
-  mnCoreBridge:
-    subnet: 10.233.128.0/24 #192.168.3.0/24
+  ## For unit test
+  #mnCoreBridge:
+  #  subnet: 10.233.128.0/24 #192.168.3.0/24
 
 replicaCount: 1
 
@@ -24,7 +25,9 @@ pfcp:
 gtpu:
   addr: 10.233.128.10 #192.168.3.10
 
-sliceIdx: 1
+## For unit test
+#sliceIdx: 1
+sliceIdx: {}
 
 podSecurityContext: {}
 

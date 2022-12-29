@@ -6,7 +6,7 @@ replicaCount: 1
 
 image:
   repository: mongo
-  tag: 4.0-xenial
+  tag: 4.4.6 #4.0-xenial
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []

@@ -5,12 +5,14 @@
 global:
   image:
     free5gc: {}
+  mnAccessBridge:
+    subnet: 192.168.3.0/24
 
 replicaCount: 1
 
 image:
-  repository: steven30801/free5gc-build
-  tag: v2.0.2
+  repository: docker.io/alan0415/free5gc-ueransim #steven30801/free5gc-build
+  tag: v3.2.1
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
@@ -20,10 +22,10 @@ fullnameOverride: ""
 mgnt:
   addr: 192.168.2.11
 data:
-  addr: 192.168.3.11
+  addr: 192.168.3.203
 amf:
   ngap:
-    addr: 192.168.3.2
+    addr: 192.168.3.22
 
 podSecurityContext: {}
 

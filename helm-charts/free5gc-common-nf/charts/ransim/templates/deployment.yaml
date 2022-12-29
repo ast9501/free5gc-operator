@@ -27,27 +27,32 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: {{ include "ransim.image" . | quote }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          command: ["/bin/bash"]
-          args: ["-c", "ethtool -K net1 tx off && sleep infinity"]
+          command: ["./nr-gnb"]
+          args: ["-c", "./config/free5gc-gnb.yaml"]
           stdin: true
           tty: true
           volumeMounts:
-            - name: test-scripts
-              mountPath: /root/gofree5gc/src/test/registration_test.go
-              subPath: registration_test.go
-            - name: test-scripts
-              mountPath: /root/gofree5gc/src/test/ngsetup_test.go
-              subPath: ngsetup_test.go
-            - name: test-scripts
-              mountPath: /root/gofree5gc/src/test/ue_config.go
-              subPath: ue_config.go
+            - name: gnb-config
+              mountPath: /ueransim/config/free5gc-gnb.yaml
+              subPath: free5gc-gnb.yaml
+            - name: ue-config
+              mountPath: /ueransim/config/free5gc-ue.yaml
+              subPath: free5gc-ue.yaml
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       volumes:
-        - name: test-scripts
+        - name: gnb-config
           configMap:
-            name: testscripts-configmap
-            defaultMode: 0755
+            name: ransim-configmap
+            items:
+            - key: free5gc-gnb.yaml
+              path: free5gc-gnb.yaml
+        - name: ue-config
+          configMap:
+            name: ransim-configmap
+            items:
+            - key: free5gc-ue.yaml
+              path: free5gc-ue.yaml
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

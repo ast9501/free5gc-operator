@@ -6,8 +6,8 @@ global:
   image:
     free5gc: {}
   ## For unit test
-  nrf:
-    addr: 10.233.102.4
+  #nrf:
+  #  addr: 192.168.2.4
 replicaCount: 1
 
 image:
@@ -20,7 +20,7 @@ nameOverride: ""
 fullnameOverride: ""
 
 http:
-  addr: 10.233.102.8 #192.168.2.8
+  addr: 192.168.2.8
 #udr:
 #  addr: 192.168.2.9
 

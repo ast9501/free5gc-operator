@@ -20,7 +20,7 @@ nameOverride: ""
 fullnameOverride: ""
 
 http:
-  addr: 10.233.102.4 #192.168.2.4
+  addr: 192.168.2.4
 
 podSecurityContext: {}
 

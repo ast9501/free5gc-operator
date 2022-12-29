@@ -7,9 +7,9 @@ global:
     free5gc: {}
   ## For unit test
   #nrf:
-  #  addr: 10.233.102.4
+  #  addr: 192.168.2.4
   #mnCoreBridge:
-  #  subnet: 10.233.128.0/24
+  #  subnet: 192.168.3.0/24
 
 replicaCount: 1
 
@@ -23,9 +23,9 @@ nameOverride: ""
 fullnameOverride: ""
 
 http:
-  addr: 10.233.102.2 #192.168.2.2
+  addr: 192.168.2.2
 ngap:
-  addr: 10.233.128.2 #192.168.3.2
+  addr: 192.168.3.22
 
 podSecurityContext: {}
 

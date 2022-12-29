@@ -6,9 +6,9 @@ global:
   image:
     free5gc: {}
   ## For unit test
-  nrf:
-    addr: 10.233.102.4
-  dbServiceDomain: mongo.default.svc.free5gc.cluster.dev
+  #nrf:
+  #  addr: 192.168.2.4
+  #dbServiceDomain: mongo.default.svc.cluster.local #mongo.default.svc.free5gc.cluster.dev
 replicaCount: 1
 
 image:
@@ -21,7 +21,7 @@ nameOverride: ""
 fullnameOverride: ""
 
 http:
-  addr: 10.233.102.6 #192.168.2.6
+  addr: 192.168.2.6
 
 podSecurityContext: {}
 

@@ -5,8 +5,9 @@
 global:
   image:
     free5gc: {}
-  nrf:
-    addr: 10.233.102.4 #192.168.2.4
+  ## For unit test
+  #nrf:
+  #  addr: 192.168.2.4
 
 replicaCount: 1
 
@@ -20,14 +21,14 @@ nameOverride: ""
 fullnameOverride: ""
 
 http:
-   addr: 10.233.102.7 #192.168.2.7
+   addr: 192.168.2.7
 pfcp:
-  addr: 10.233.102.7 #192.168.2.7
+  addr: 192.168.2.7
 upf:
   pfcp:
-    addr: 10.233.102.10 #192.168.2.10
+    addr: 192.168.2.10
   gtpu:
-    addr: 10.233.128.10 #10.233.128.10 #192.168.2.10
+    addr: 192.168.3.101
 #gnb:
 #  addr: 192.168.2.11
 

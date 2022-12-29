@@ -7,7 +7,7 @@ global:
     free5gc: {}
   ## For unit test
   #mnCoreBridge:
-  #  subnet: 10.233.128.0/24 #192.168.3.0/24
+  #  subnet: 192.168.3.0/24
 
 replicaCount: 1
 
@@ -21,9 +21,9 @@ nameOverride: ""
 fullnameOverride: ""
 
 pfcp:
-  addr: 10.233.102.10 #192.168.2.10
+  addr: 192.168.2.10
 gtpu:
-  addr: 10.233.128.10 #192.168.3.10
+  addr: 192.168.3.101
 
 ## For unit test
 #sliceIdx: 1

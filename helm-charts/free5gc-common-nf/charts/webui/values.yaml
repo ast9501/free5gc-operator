@@ -6,7 +6,7 @@ global:
   image:
     free5gc: {}
   ## For unit test
-  #dbServiceDomain: mongo.default.svc.free5gc.cluster.dev #mongo.default.svc.cluster.local
+  #dbServiceDomain: mongo.default.svc.cluster.local
 replicaCount: 1
 
 image:

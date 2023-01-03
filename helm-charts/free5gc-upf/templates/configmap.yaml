@@ -38,7 +38,7 @@ data:
       reportCaller: false # enable the caller report or not, value: true or false
 
   upf-iptables.sh: |
-    #!/bin/bash
+    #!/bin/sh
     #
     # Configure iptables in UPF
     #

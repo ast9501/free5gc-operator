@@ -30,7 +30,7 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: {{ include "upf.image" . | quote }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          command: ["/bin/bash"]
+          command: ["/bin/sh"]
           args: ["-c", "sleep 5s && ./upf-iptables.sh && ./upf -c ./config/upfcfg.yaml"]
           stdin: true
           tty: true

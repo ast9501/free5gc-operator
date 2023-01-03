@@ -5,14 +5,13 @@
 global:
   image:
     free5gc: {}
-  ## For unit test
-  #mnCoreBridge:
-  #  subnet: 192.168.3.0/24
+  mnCoreBridge:
+    subnet: 192.168.3.0/24
 
 replicaCount: 1
 
 image:
-  repository: docker.io/free5gc/upf #steven30801/free5gc-build
+  repository: alan0415/free5gc-ns-enabled #docker.io/free5gc/upf #steven30801/free5gc-build
   tag: v3.2.1 #v2.0.2
   pullPolicy: IfNotPresent
 

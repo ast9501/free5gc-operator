@@ -25,7 +25,7 @@ spec:
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          image: {{ include "ransim.image" . | quote }}
+          image: docker.io/alan0415/free5gc-ueransim:v3.2.1 #{{ include "ransim.image" . | quote }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           command: ["./nr-gnb"]
           args: ["-c", "./config/free5gc-gnb.yaml"]

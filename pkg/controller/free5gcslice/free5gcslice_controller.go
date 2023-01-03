@@ -218,8 +218,8 @@ func (r *ReconcileFree5GCSlice) Reconcile(request reconcile.Request) (reconcile.
 		"global": map[string]interface{}{
 			"image": map[string]interface{}{
 				"free5gc": map[string]interface{}{
-					"repository": "docker.winlab.nctu.me/free5gc-build",
-					"tag":        "latest",
+					"repository": "alan0415/free5gc-ns-enabled",
+					"tag":        "v3.2.1",
 				},
 			},
 		},

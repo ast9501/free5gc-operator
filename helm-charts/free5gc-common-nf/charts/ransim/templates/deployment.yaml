@@ -5,7 +5,7 @@ metadata:
   labels:
     {{- include "ransim.labels" . | nindent 4 }}
   annotations:
-    "helm.sh/hook-weight": "-5"
+    "helm.sh/hook-weight": "-10"
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
@@ -21,6 +21,10 @@ spec:
     spec:
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      initContainers:
+        - name: wait-amf
+          image: sequenceiq/busybox
+          command: ['sh', '-c', 'while [ $(curl --insecure --connect-timeout 1 -s -o /dev/null -w "%{http_code}" http://{{ .Values.amf.mgnt.addr }}:8000) -ne 404 ]; do echo waiting for dependencies; sleep 1; done']
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
